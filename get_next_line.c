@@ -6,7 +6,7 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 18:10:57 by kquispe           #+#    #+#             */
-/*   Updated: 2023/11/16 17:13:40 by kquispe          ###   ########.fr       */
+/*   Updated: 2023/11/18 08:29:22 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,47 @@
 
 char *get_next_line(int fd)
 {
-	int txt;
 	int i;
+	int txt;
 	static char *buff;
+	
 	char *temp;
-
+	char *buff_tot;
+	int j;
+	
+	if (fd < 0)
+		return (NULL);
+	buff = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (!buff)
+		return (NULL);
+	
 	i = 0;
-	buff = (char *)malloc(BUFFER_SIZE + 1);
-	txt = read(fd, buff, BUFFER_SIZE);
-	if (txt == -1)
-		printf("error");
-
-	while (buff[i] || buff[i] == '\n')
+	txt = 1;
+	while (txt > 0)
 	{
-		// printf("%d\n", i);
-		i++;
+		
+		while ((buff[i] != '\n' || !buff[i]) && i < BUFFER_SIZE)
+		{	
+			printf("%d\n",i);
+			i++;
+		}
+		if (buff[i] == '\n' || !buff[i] || i == BUFFER_SIZE)
+		{
+			
+			ft_next();
+			break ;
+		}
 	}
-	int j = 0;
-	temp = (char *)malloc((i + 1) * sizeof(char));
-	temp[i] = '\0';
-	printf("%c", temp[j]);
+	buff_tot = (char *)ft_calloc(i + 1, sizeof(char));
+	if (!buff_tot)
+		return (NULL);
+	j = 0;
 	while (j < i)
 	{
-		temp[j] = buff[j];
+		buff_tot[j] = buff[j];
 		j++;
 	}
-	printf("%s", temp);
-	free(temp);
+	printf("%s", buff_tot);
 	free(buff);
 	return (0);
 }

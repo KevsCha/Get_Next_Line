@@ -6,7 +6,7 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:23:29 by kquispe           #+#    #+#             */
-/*   Updated: 2023/11/16 13:24:53 by kquispe          ###   ########.fr       */
+/*   Updated: 2023/11/18 03:15:13 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,21 @@ size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
+
+void    *ft_calloc(size_t num, size_t bit)
+{
+        char    *arr;
+		size_t	i;
+
+        arr = (char *)malloc(num * bit);
+        if (!arr)
+                return (NULL);
+		i = 0;
+        while (i < num)
+			arr[i++] = '\0';
+        return (arr);
+}
+
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
