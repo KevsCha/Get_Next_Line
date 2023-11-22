@@ -6,7 +6,7 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:23:29 by kquispe           #+#    #+#             */
-/*   Updated: 2023/11/20 18:30:41 by kquispe          ###   ########.fr       */
+/*   Updated: 2023/11/22 15:14:47 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,28 @@ void    *ft_calloc(size_t num, size_t bit)
         while (i < num)
 			arr[i++] = '\0';
         return (arr);
+}
+
+char	*ft_strchr(char *s, int c)
+{
+	size_t	i;
+	char	*temp;
+
+	i = 0;
+	temp = (char *)s;
+	while (temp[i])
+	{
+		if (temp[i] == (char)c)
+		{
+			//printf("%s\n----%s\n", s,temp + i);
+			return (temp + i);
+		}
+		i++;
+	}
+	if (temp[i] == (char)c)
+		return (temp + i);
+	//printf("[===]%s\n", temp + i);
+	return (0);
 }
 
 

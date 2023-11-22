@@ -11,7 +11,12 @@ int main(void)
 	str = "test.txt";
 	fd = open(str, O_RDONLY);
 	i = 0;
-	print = get_next_line(fd);
+	while (i <  3)
+	{
+		print = get_next_line(fd);
+		i++;
+	}
+	//printf("%s", print);
 	free(print);
 	//get_next_line(fd);
 	close(fd);
