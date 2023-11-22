@@ -5,12 +5,14 @@ int main(void)
 {
 	int	fd;
 	char *str;
+	char *print;
 	int	i;
 
 	str = "test.txt";
 	fd = open(str, O_RDONLY);
 	i = 0;
-	get_next_line(fd);
+	print = get_next_line(fd);
+	free(print);
 	//get_next_line(fd);
 	close(fd);
     return (0);

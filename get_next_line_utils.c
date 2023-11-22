@@ -6,7 +6,7 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:23:29 by kquispe           #+#    #+#             */
-/*   Updated: 2023/11/18 03:15:13 by kquispe          ###   ########.fr       */
+/*   Updated: 2023/11/20 18:30:41 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 		i++;
 	return (i);
@@ -37,7 +39,7 @@ void    *ft_calloc(size_t num, size_t bit)
 }
 
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		len1;
 	int		len2;
