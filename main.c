@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/29 18:04:03 by kquispe           #+#    #+#             */
+/*   Updated: 2023/11/29 18:04:40 by kquispe          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include "get_next_line.h"
 
+/*
 int main(void)
 {
 	int	fd;
@@ -11,23 +24,20 @@ int main(void)
 	str = "test.txt";
 	fd = open(str, O_RDONLY);
 	i = 0;
-	while (i <  3)
+	while (i < 12)
 	{
+		
 		print = get_next_line(fd);
-		printf("%s\n", print);
+		printf("[LINEA %d]%s\n", i, print);
+		
+		if (print == NULL)
+			break;
 		i++;
 	}
-	free(print);
+	system("leaks get_next_line");
+	//free(print);
 	//get_next_line(fd);
 	close(fd);
     return (0);
 }
-//?Utilizar funciones para abrir files open, close, read:
-/*
-!las variables "static" retienen el valor sin importar cuantas veces 
-    !se llame a la misma funcion, es decir, si se declara una variable en 0
-    !y su valor aumenta a medida que el programa avance y se sigue llamando
-    !a la misma funcion el valor se encuentra en el estado anterior y se sigue aumentado
-    !si de da el caso.
-?Archivos de cabecera ".h"
 */

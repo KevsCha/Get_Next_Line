@@ -6,57 +6,35 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 18:10:57 by kquispe           #+#    #+#             */
-/*   Updated: 2023/11/28 16:36:17 by kquispe          ###   ########.fr       */
+/*   Updated: 2023/11/29 18:09:01 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char *ft_leng_calloc(char *str)
+void	*ft_free(char *buff)
 {
-	char	*temp;
-	int		i;
-	int		j;
-	
-	i = 0;
-	j = 0;
-	while (str[i] && str[i] != '\n')
-		i++;
-	temp = ft_calloc(i + 1, sizeof(char));
-	if (!temp)
-		return (NULL);
-	while (str[j] && str[j] != '\n')
-	{
-		temp[j] = str[j];
-		j++;
-	}
-	//printf ("[line]%s\n", temp);
-	return (temp);
+	free(buff);
+	return (NULL);
 }
 
-static char *ft_return_line(char *buff, int line)
+static char	*ft_return_line(char *buff)
 {
 	int		i;
-	int		line_num;
-	int		key;
+	int		j;
 	char	*temp;
-	
+
 	i = 0;
-	key = 1;
-	line_num = 1;
-	while (buff[i])
-	{
-		if (buff[i] == '\n')
-		{
-			line_num++;
-			i++;
-		}
-		if (line == line_num && key == 1)
-		{
-			temp = ft_leng_calloc(buff + i);
-			key = 0;
-		}
+	j = 0;
+	while (buff[i] && buff[i] != '\n')
 		i++;
+	temp = ft_calloc((size_t)i + 1, sizeof(char));
+	if (!temp)
+		return (ft_free(buff));
+	while (buff[j] && buff[j] != '\n')
+	{
+		temp[j] = buff[j];
+		j++;
 	}
 	return (temp);
 }
@@ -69,39 +47,45 @@ static char	*ft_line_found(char *buff, int fd)
 	txt = 1;
 	temp = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!temp)
-		return (free(buff),NULL);
-	while (txt > 0)
+	{
+		free(buff);
+		return (NULL);
+	}
+	while (txt > 0 && !ft_strchr(buff, '\n'))
 	{
 		txt = read(fd, temp, BUFFER_SIZE);
+		if (txt == 0)
+		{
+			free(temp);
+			return (buff);
+		}
+		if (txt == -1)
+			return (free(temp), free(buff), NULL);
 		buff = ft_strjoin(buff, temp);
-		if (ft_strchr(temp, '\n'))
-			break;
 	}
+	free(temp);
 	return (buff);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	static char *buff;
-	char *temp;
-	int	i;
-	int num_line;
-	
+	static char	*buff;
+	char		*temp;
+
 	if (fd < 0)
 		return (free(buff), NULL);
-	i = 0;
-	num_line = 0;
 	buff = ft_line_found(buff, fd);
-	while (buff[i])
+	if (!buff)
+		return (NULL);
+	temp = ft_return_line(buff);
+	while (*buff)
 	{
-		if (buff[i] == '\n' || buff[num_line + 1] == '\0')
-			num_line++;
-		i++;
+		if (*buff == '\n' || *(buff + 1) == '\0')
+		{
+			buff++;
+			break ;
+		}
+		buff++;
 	}
-	//printf("%d\n",num_line);
-	temp = ft_return_line(buff, num_line);
-	//printf("%s\n", temp);
-	//free(temp);
 	return (temp);
 }
-// TODO: averiguar que son lo FD y para q sirven,

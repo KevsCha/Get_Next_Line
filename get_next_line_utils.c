@@ -6,7 +6,7 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:23:29 by kquispe           #+#    #+#             */
-/*   Updated: 2023/11/23 12:15:32 by kquispe          ###   ########.fr       */
+/*   Updated: 2023/11/29 18:17:15 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-void    *ft_calloc(size_t num, size_t bit)
+void	*ft_calloc(size_t num, size_t bit)
 {
-        char    *arr;
-		size_t	i;
+	char	*arr;
+	size_t	i;
 
-		i = 0;
-        arr = (char *)malloc(num * bit);
-        if (!arr)
-                return (NULL);
-        while (i < num)
-			arr[i++] = '\0';
-        return (arr);
+	i = 0;
+	arr = (char *)malloc(num * bit);
+	if (!arr)
+		return (NULL);
+	while (i < num)
+		arr[i++] = '\0';
+	return (arr);
 }
 
 char	*ft_strchr(char *s, int c)
@@ -44,22 +44,19 @@ char	*ft_strchr(char *s, int c)
 	char	*temp;
 
 	i = 0;
+	if (!s)
+		return (0);
 	temp = (char *)s;
 	while (temp[i])
 	{
 		if (temp[i] == (char)c)
-		{
-			//printf("%s\n----%s\n", s,temp + i);
 			return (temp + i);
-		}
 		i++;
 	}
 	if (temp[i] == (char)c)
 		return (temp + i);
-	//printf("[===]%s\n", temp + i);
 	return (0);
 }
-
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -71,7 +68,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = 0;
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
-	strtot = (char *)malloc(len1 + len2 + 1);
+	strtot = (char *)ft_calloc(len1 + len2 + 1, sizeof(char));
 	if (strtot == NULL)
 		return (NULL);
 	while (i < len1 + len2)
@@ -84,6 +81,5 @@ char	*ft_strjoin(char *s1, char *s2)
 		s2++;
 		i++;
 	}
-	strtot[i] = '\0';
 	return (strtot);
 }
