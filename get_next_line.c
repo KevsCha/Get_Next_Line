@@ -6,7 +6,7 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 18:10:57 by kquispe           #+#    #+#             */
-/*   Updated: 2023/11/29 18:09:01 by kquispe          ###   ########.fr       */
+/*   Updated: 2023/12/02 03:31:34 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static char	*ft_line_found(char *buff, int fd)
 			return (buff);
 		}
 		if (txt == -1)
-			return (free(temp), free(buff), NULL);
+			return (free(temp), NULL);
 		buff = ft_strjoin(buff, temp);
 	}
 	free(temp);
@@ -80,7 +80,7 @@ char	*get_next_line(int fd)
 	temp = ft_return_line(buff);
 	while (*buff)
 	{
-		if (*buff == '\n' || *(buff + 1) == '\0')
+		if (*buff == '\n')
 		{
 			buff++;
 			break ;
