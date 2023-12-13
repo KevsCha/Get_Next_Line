@@ -6,7 +6,7 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:23:29 by kquispe           #+#    #+#             */
-/*   Updated: 2023/12/05 18:06:55 by kquispe          ###   ########.fr       */
+/*   Updated: 2023/12/13 15:20:31 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	*ft_calloc(size_t num, size_t bit)
 	size_t	i;
 
 	i = 0;
+	if (!num || !bit)
+		return (NULL);
 	arr = (char *)malloc(num * bit);
 	if (!arr)
 		return (NULL);
@@ -73,6 +75,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		s1 = ft_calloc(1, 1);
 		if (!s1)
 			return (NULL);
+		s1[0] = 0;
 	}
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
@@ -83,8 +86,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		strtot[i] = s1[i];
 	while (++j < len2)
 		strtot[i + j] = s2[j];
-	free(s1);
-	return (strtot);
+	return (free(s1), strtot);
 }
 /*
 	int		len1;

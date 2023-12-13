@@ -6,13 +6,12 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:04:03 by kquispe           #+#    #+#             */
-/*   Updated: 2023/12/05 18:41:04 by kquispe          ###   ########.fr       */
+/*   Updated: 2023/12/13 15:21:31 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "get_next_line.h"
-
 
 int main(void)
 {
@@ -37,14 +36,13 @@ int main(void)
 	str5 = "variable_nls.txt";
 	str6 = "lines_around_10.txt";
 	str7 = "read_error.txt";
-	fd = open(str2, O_RDONLY);
+	fd = open(str4, O_RDONLY);
 	i = 0;
-	while (i < 1)
+	while (i < 10)
 	{
 		
 		print = get_next_line(fd);
-		printf("[LINEA %d]%s\n", i, print);
-		
+		printf("[LINEA %d]%s", i, print);
 		free(print);
 		if (print == NULL)
 			break;
@@ -54,3 +52,4 @@ int main(void)
 	close(fd);
     return (0);
 }
+
