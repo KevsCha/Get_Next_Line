@@ -6,7 +6,7 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 18:10:57 by kquispe           #+#    #+#             */
-/*   Updated: 2023/12/13 15:17:17 by kquispe          ###   ########.fr       */
+/*   Updated: 2023/12/13 15:29:25 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ static char	*ft_return_line(char *buff)
 	while (buff[j] && buff[j] != '\n')
 	{
 		temp[j] = buff[j];
-		if (buff[j + 1] == '\n')
-			temp[j + 1] = '\n';
 		j++;
 	}
+	if (buff[j] == '\n')
+		temp[j] = '\n';
 	return (temp);
 }
 
@@ -103,7 +103,7 @@ char	*get_next_line(int fd)
 	while (buff[i])
 		i++;
 	if (i == 0)
-		return (NULL);		
+		return (NULL);
 	temp = ft_return_line(buff);
 	if (!temp)
 		return (free(buff), NULL);
