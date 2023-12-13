@@ -6,7 +6,7 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 18:10:57 by kquispe           #+#    #+#             */
-/*   Updated: 2023/12/02 03:31:34 by kquispe          ###   ########.fr       */
+/*   Updated: 2023/12/05 18:55:15 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,33 @@ void	*ft_free(char *buff)
 {
 	free(buff);
 	return (NULL);
+}
+
+char	*ft_buff_change(char *buff)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	*aux;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (buff[i] && buff[i] != '\n')
+		i++;
+	if (buff[i] == '\n')
+		while (buff[i + j + 1])
+			j++;
+	aux = ft_calloc(j + 1, sizeof(char));
+	if (!aux)
+		return (free(buff), NULL);
+	while (k < j || k < 0)
+	{
+		aux[k] = buff[i + 1 + k];
+		k++;
+	}
+	free(buff);
+	return (aux);
 }
 
 static char	*ft_return_line(char *buff)
@@ -55,13 +82,12 @@ static char	*ft_line_found(char *buff, int fd)
 	{
 		txt = read(fd, temp, BUFFER_SIZE);
 		if (txt == 0)
-		{
-			free(temp);
-			return (buff);
-		}
+			return (free(temp), buff);
 		if (txt == -1)
 			return (free(temp), NULL);
 		buff = ft_strjoin(buff, temp);
+		if (!buff)
+			return (free(temp), NULL);
 	}
 	free(temp);
 	return (buff);
@@ -76,16 +102,9 @@ char	*get_next_line(int fd)
 		return (free(buff), NULL);
 	buff = ft_line_found(buff, fd);
 	if (!buff)
-		return (NULL);
+		return (free(buff), NULL);
 	temp = ft_return_line(buff);
-	while (*buff)
-	{
-		if (*buff == '\n')
-		{
-			buff++;
-			break ;
-		}
-		buff++;
-	}
+	buff = ft_buff_change(buff);
+	system("leaks a.out");
 	return (temp);
 }

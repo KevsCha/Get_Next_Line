@@ -6,7 +6,7 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:23:29 by kquispe           #+#    #+#             */
-/*   Updated: 2023/12/02 03:02:58 by kquispe          ###   ########.fr       */
+/*   Updated: 2023/12/05 18:06:55 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,11 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		len1;
 	int		len2;
 	int		i;
+	int		j;
 	char	*strtot;
 
 	i = -1;
+	j = -1;
 	if (!s1)
 	{
 		s1 = ft_calloc(1, 1);
@@ -77,13 +79,11 @@ char	*ft_strjoin(char *s1, char *s2)
 	strtot = (char *)ft_calloc(len1 + len2 + 1, sizeof(char));
 	if (strtot == NULL)
 		return (NULL);
-	while (++i < len1 + len2)
-	{
-		if (i < len1)
-			strtot[i] = *s1++;
-		if (i < len2)
-			strtot[i + len1] = *s2++;
-	}
+	while (++i < len1)
+		strtot[i] = s1[i];
+	while (++j < len2)
+		strtot[i + j] = s2[j];
+	free(s1);
 	return (strtot);
 }
 /*
