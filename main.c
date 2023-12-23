@@ -6,7 +6,7 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:04:03 by kquispe           #+#    #+#             */
-/*   Updated: 2023/12/13 15:21:31 by kquispe          ###   ########.fr       */
+/*   Updated: 2023/12/23 15:17:14 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int main(void)
 	str5 = "variable_nls.txt";
 	str6 = "lines_around_10.txt";
 	str7 = "read_error.txt";
-	fd = open(str4, O_RDONLY);
+	fd = open(str7, O_RDONLY);
 	i = 0;
-	while (i < 10)
+	while (i < 4)
 	{
 		
 		print = get_next_line(fd);
@@ -48,8 +48,7 @@ int main(void)
 			break;
 		i++;
 	}
-	
+	system("leaks a.out");
 	close(fd);
     return (0);
 }
-

@@ -6,7 +6,7 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 18:10:57 by kquispe           #+#    #+#             */
-/*   Updated: 2023/12/13 16:10:41 by kquispe          ###   ########.fr       */
+/*   Updated: 2023/12/23 15:18:32 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*ft_buff_change(char *buff)
 	if (buff[i] == '\n')
 		while (buff[i + j + 1])
 			j++;
-	aux = ft_calloc(j + 1, sizeof(char));
+	aux = malloc(j + 1 * sizeof(char));
 	if (!aux)
 		return (free(buff), buff = NULL, NULL);
 	while (k < j || k < 0)
@@ -35,9 +35,8 @@ static char	*ft_buff_change(char *buff)
 		aux[k] = buff[i + 1 + k];
 		k++;
 	}
-	free(buff);
-	buff = NULL;
-	return (aux);
+	aux[k] = '\0';
+	return (free(buff), buff = NULL, aux);
 }
 
 static char	*ft_return_line(char *buff)
@@ -71,14 +70,15 @@ static char	*ft_line_found(char *buff, int fd)
 	char	*temp;
 
 	txt = 1;
-	temp = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	temp = (char *)malloc(BUFFER_SIZE + 1 * sizeof(char));
 	if (!temp)
 		return (free(buff), buff = NULL, NULL);
-	while (txt != 0 && !ft_strchr(buff, '\n'))
+	while (!ft_strchr(buff, '\n') && txt != 0)
 	{
 		txt = read(fd, temp, BUFFER_SIZE);
 		if (txt == 0)
 			return (free(temp), temp = NULL, buff);
+		temp[txt] = '\0';
 		if (txt == -1)
 			return (free(temp), temp = NULL, NULL);
 		buff = ft_strjoin(buff, temp);
