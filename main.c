@@ -6,7 +6,7 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:04:03 by kquispe           #+#    #+#             */
-/*   Updated: 2023/12/23 15:17:14 by kquispe          ###   ########.fr       */
+/*   Updated: 2023/12/26 18:48:58 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int main(void)
 	char *str5;
 	char *str6;
 	char *str7;
-	char *str8;
 	char *print;
 	int	i;
 
@@ -38,7 +37,7 @@ int main(void)
 	str7 = "read_error.txt";
 	fd = open(str7, O_RDONLY);
 	i = 0;
-	while (i < 4)
+	while (i < 3)
 	{
 		
 		print = get_next_line(fd);
