@@ -6,7 +6,7 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:04:03 by kquispe           #+#    #+#             */
-/*   Updated: 2023/12/26 18:48:58 by kquispe          ###   ########.fr       */
+/*   Updated: 2024/01/08 15:26:10 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main(void)
 	str7 = "read_error.txt";
 	fd = open(str7, O_RDONLY);
 	i = 0;
-	while (i < 3)
+	while (i < 5)
 	{
 		
 		print = get_next_line(fd);
@@ -47,7 +47,6 @@ int main(void)
 			break;
 		i++;
 	}
-	system("leaks a.out");
 	close(fd);
     return (0);
 }
