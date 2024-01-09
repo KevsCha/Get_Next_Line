@@ -6,7 +6,7 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 18:10:57 by kquispe           #+#    #+#             */
-/*   Updated: 2024/01/08 15:22:52 by kquispe          ###   ########.fr       */
+/*   Updated: 2024/01/09 20:27:22 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static char	*ft_buff_change(char *buff)
 	k = 0;
 	while (buff[i] && buff[i] != '\n')
 		i++;
+	if ((buff[i] == '\n' && buff[i + 1] == '\0') || !buff[i])
+		return (free(buff), buff = NULL, NULL);
 	if (buff[i] == '\n')
 		while (buff[i + j + 1])
 			j++;
@@ -37,6 +39,28 @@ static char	*ft_buff_change(char *buff)
 	}
 	return (free(buff), buff = NULL, aux);
 }
+/* static char	*ft_buff_change(char *buff)
+{
+	int		i;
+	int		k;
+	char	*aux;
+
+	i = 0;
+	k = 0;
+	while (buff[i] && buff[i] != '\n')
+		i++;
+	if(!buff[i])
+		return (free(buff), buff = NULL, NULL);
+	aux = (char *)ft_calloc(ft_strlen(buff) - i + 1, 1);
+	if (!aux)
+		return (free(buff), buff = NULL, NULL);
+	i++;
+	while (buff[i])
+	{
+		aux[k] = buff[i++];
+		k++;
+	}
+	return (free(buff), buff = NULL, aux); */
 
 static char	*ft_return_line(char *buff)
 {
@@ -52,7 +76,7 @@ static char	*ft_return_line(char *buff)
 		i++;
 	temp = ft_calloc((size_t)i + 1, sizeof(char));
 	if (!temp)
-		return (free(buff), buff = NULL, NULL);
+		return (NULL);
 	while (buff[j] && buff[j] != '\n')
 	{
 		temp[j] = buff[j];
@@ -107,7 +131,7 @@ char	*get_next_line(int fd)
 	if (!temp)
 		return (free(buff), buff = NULL, NULL);
 	buff = ft_buff_change(buff);
-	if (!buff)
-		return (free(temp), temp = NULL, NULL);
+	//if (!buff)
+	//	return (free(temp), temp = NULL, NULL);
 	return (temp);
 }

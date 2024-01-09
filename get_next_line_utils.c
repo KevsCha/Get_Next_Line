@@ -6,7 +6,7 @@
 /*   By: kquispe <kquispe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:23:29 by kquispe           #+#    #+#             */
-/*   Updated: 2023/12/26 19:12:58 by kquispe          ###   ########.fr       */
+/*   Updated: 2024/01/09 20:28:43 by kquispe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	{
 		s1 = ft_calloc(1, sizeof(char));
 		if (!s1)
-			return (free(s2), NULL);
-		s1[0] = 0;
+			return (NULL);
 	}
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
 	strtot = (char *)ft_calloc(len1 + len2 + 1, sizeof(char));
 	if (!strtot)
-		return (free(s1), free(s2), NULL);
+		return (free(s1), NULL);
 	while (++i < len1)
 		strtot[i] = s1[i];
 	while (++j < len2)
